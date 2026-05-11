@@ -151,6 +151,14 @@ impl ModelManager {
         // Check which models are already downloaded
         manager.update_download_status()?;
 
+        // Qwen3-ASR model is loaded via Python sidecar from ModelScope cache,
+        // not downloaded by Handy. Override is_downloaded based on cache path.
+        if let Some(qwen) = manager.available_models.lock().unwrap().get_mut("qwen3-asr-0.6b") {
+            let home = std::env::var("HOME").unwrap_or_default();
+            let cache = format!("{home}/.cache/modelscope/hub/models/Qwen/Qwen3-ASR-0___6B");
+            qwen.is_downloaded = std::path::Path::new(&cache).exists();
+        }
+
         // Auto-select a model if none is currently selected
         manager.auto_select_model_if_needed()?;
 
