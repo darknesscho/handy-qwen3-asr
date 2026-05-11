@@ -1,0 +1,48 @@
+# Build
+/target
+/dist
+/dist-ssr
+
+# Dependencies
+/node_modules
+/python_sidecar/venv/
+/python_sidecar/__pycache__/
+
+# Reference (not part of repo)
+/RAW/
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*.suo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Config / Secrets
+.claude/
+.env
+.env.local
+.envrc
+.direnv
+
+# Logs
+*.log
+logs/
+
+# Test artifacts
+playwright-report/
+test-results/
+blob-report/
+
+# Legacy
+package-lock.json
+.crush/
+recording_*
+result
+
+# Bun
+bun.lock
