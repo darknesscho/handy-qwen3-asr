@@ -111,18 +111,21 @@ impl ModelManager {
         .map(String::from)
         .collect();
 
+        let home = std::env::var("HOME").unwrap_or_default();
+        let model_cache = format!("{home}/.cache/modelscope/hub/models/Qwen/Qwen3-ASR-0___6B");
+        let is_downloaded = std::path::Path::new(&model_cache).exists();
+
         available_models.insert(
             "qwen3-asr-0.6b".to_string(),
             ModelInfo {
                 id: "qwen3-asr-0.6b".to_string(),
                 name: "Qwen3-ASR 0.6B".to_string(),
-                description: "State-of-the-art multilingual speech recognition. Supports 52 languages."
-                    .to_string(),
-                filename: "sherpa-onnx-qwen3-asr-0.6B-int8-2026-03-25".to_string(),
-                url: Some("https://github.com/k2-fsa/sherpa-onnx/releases/download/asr-models/sherpa-onnx-qwen3-asr-0.6B-int8-2026-03-25.tar.bz2".to_string()),
-                sha256: Some("8c0ffbddc05fe90a52e38e370bc76d32fc197a04054f5c5b8523c3a3f4871132".to_string()),
-                size_mb: 838,
-                is_downloaded: false,
+                description: "通过 Python sidecar (PyTorch CUDA) 加载的 Qwen3-ASR 模型。需先运行 python_sidecar/setup.sh 配置环境。".to_string(),
+                filename: "Qwen3-ASR-0.6B (ModelScope)".to_string(),
+                url: None,
+                sha256: None,
+                size_mb: 1200,
+                is_downloaded,
                 is_downloading: false,
                 partial_size: 0,
                 is_directory: true,
